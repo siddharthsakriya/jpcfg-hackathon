@@ -1,0 +1,41 @@
+{% extends 'weansgames/base.html' %} {% load static %} {% block content_block %}
+{% load crispy_forms_tags %}
+<title>Manage Event</title>
+<h1 style="text-align: center; padding-top: 5%; color: #894fbf">Add Event</h1>
+<div class="container" style="padding-top: 5%; padding-bottom: 15%">
+  <div class="col mb-3">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        {% if registered %}
+        <p class="fs-4 text-success">Updated event!</p>
+        {% endif %}
+        <form
+          id="game_form"
+          method="post"
+          action="{% url 'tournaments:manage' id  %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %} 
+          {{event_form.name.errors}} 
+          {{ event_form.name | as_crispy_field}} 
+          {{event_form.startDate.errors}} 
+          {{event_form.startDate | as_crispy_field }}
+          {{event_form.endDate.errors}} 
+          {{event_form.endDate | as_crispy_field }}
+          {{event_form.game.errors}} 
+          {{event_form.game | as_crispy_field }}
+          {{event_form.players.errors}} 
+          {{event_form.players | as_crispy_field }}
+          <button
+            type="submit"
+            value="Update Event"
+            class="btn btn-primary btn-block mb-4"
+          >
+            Update Event
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

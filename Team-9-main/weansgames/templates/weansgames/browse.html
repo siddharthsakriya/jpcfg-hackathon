@@ -1,0 +1,46 @@
+{% extends 'weansgames/base.html' %} {% load static %} {% block content_block %}
+<title>Browse Events</title>
+<h1 style="text-align: center; padding-top: 5%; color: #894fbf">
+  Browse Events
+</h1>
+
+<div class="container" style="padding-top: 5%; padding-bottom: 15%">
+  <div class="col mb-3">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        {% for event in events %}
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#collapseOne{{ event.id }}"
+                aria-expanded="false"
+                aria-controls="collapseOne{{ event.id }}"
+              >
+                {{ event.name }}, {{ event.startDate }}
+              </button>
+            </h2>
+            <div
+              id="collapseOne{{ event.id }}"
+              class="accordion-collapse collapse"
+              aria-labelledby="headingOne"
+              data-bs-parent="#accordionExample"
+            >
+              <div class="accordion-body">
+                {{ event.game.name }}: {{ event.game.description }}
+		 {%if user.is_staff%}
+                <a href="{% url 'tournaments:manage' event.id%}">Edit</a>
+                {%endif%}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

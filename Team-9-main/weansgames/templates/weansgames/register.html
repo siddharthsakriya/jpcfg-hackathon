@@ -1,0 +1,52 @@
+{% extends 'weansgames/base.html' %} {% load static %} {% block content_block %}
+    {% load crispy_forms_tags %}
+    <h1 style="text-align: center; padding-top: 5%; color: #894FBF;"> Register Page </h1>
+    <div class="container" style="padding-top: 5%; padding-bottom: 15%">
+        <div class="col mb-3">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    {% if registered %}
+                        <p class="fs-4 text-success">Successfully Registered</p>
+                    {% endif %}
+                    <form id="user_form" method="post" action="{% url 'tournaments:register' %}"
+                        enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="form-outline mb-4">
+                            {{ player_form.name.errors }}
+                            {{ player_form.name|as_crispy_field }}
+                        </div>
+                        <div class="form-outline mb-4">
+                            {{ player_form.surname.errors }}
+                            {{ player_form.surname|as_crispy_field }}
+                        </div>
+                        <div class="form-outline mb-4">
+                            {{ user_form.username.errors }}
+                            {{ user_form.username | as_crispy_field }}
+                        </div>
+                        <div class="form-outline mb-4">
+                            {{ user_form.email.errors }}
+                            {{ user_form.email|as_crispy_field }}
+                        </div>
+                        <div class="form-outline mb-4">
+                            {{ user_form.password.errors }}
+                            {{ user_form.password|as_crispy_field }}
+                        </div>
+                        <div class="row mb-4">
+                            <div class="col">
+                                <!-- Simple link -->
+                                <a href="#!">Forgot password?</a>
+                            </div>
+                        </div>
+                        <!-- Submit button -->
+                        <button type="submit" value="Register" class="btn btn-primary btn-block mb-4">Register</button>
+                        
+                        <div class="text-center">
+                            <p>Already a member? <a href="{% url 'tournaments:login' %}">Login</a></p>
+                          </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

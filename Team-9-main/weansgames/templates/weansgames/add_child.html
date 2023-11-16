@@ -1,0 +1,39 @@
+{% extends 'weansgames/base.html' %} {% load static %} {% block content_block %}
+{% load crispy_forms_tags %}
+<title>Add Child</title>
+<h1 style="text-align: center; padding-top: 5%; color: #894fbf">Add child</h1>
+<div class="container" style="padding-top: 5%; padding-bottom: 15%">
+  <div class="col mb-3">
+    <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        {% if registered %}
+        <p class="fs-4 text-success">Added child!</p>
+        {% endif %}
+        <form
+          id="kid_form"
+          method="post"
+          action="{% url 'tournaments:add_child' %}"
+          enctype="multipart/form-data"
+        >
+        {% csrf_token %}
+        {{player_form.name.errors}} 
+        {{ player_form.name |as_crispy_field }}
+        {{player_form.surname.errors}}
+        {{player_form.surname | as_crispy_field }}
+        {{child_form.name.errors}}
+        {{child_form.age | as_crispy_field }}
+        {{child_form.favourite_genre.errors}}
+        {{ child_form.favourite_genre |as_crispy_field }}
+          <button
+            type="submit"
+            value="Add Child"
+            class="btn btn-primary btn-block mb-4"
+          >
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

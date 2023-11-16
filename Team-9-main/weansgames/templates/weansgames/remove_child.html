@@ -1,0 +1,38 @@
+{% extends 'weansgames/base.html' %} {% load static %} {% block content_block %}
+<title>Remove Child</title>
+    <h1 style="text-align: center; padding-top: 5%; color: #894FBF;"> Remove child </h1>
+<div class="container" style="padding-bottom: 8%; padding-top: 5%">
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+      <div class="card-body">
+        <table class="table table-hover ">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+          {% for child in child_list %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>{{child.player.name}}</td>
+              <td>{{child.player.surname}}</td>
+              <td>
+                  <form name="remove" method="post" action="{% url 'tournaments:remove_child' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="name" value = {{child.player.name}} />
+                        <input type="hidden" name="surname" value = {{child.player.surname}} />
+                        <input type="hidden" name="age" value ={{child.age}} />
+                        <input type="submit" value="Remove" />
+                  </form>
+              </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+{% endblock %}

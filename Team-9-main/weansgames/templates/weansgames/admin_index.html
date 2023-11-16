@@ -1,0 +1,56 @@
+{% extends 'weansgames/base.html' %}{% block content_block %}
+<title>Admin Index</title>
+<div class="container" style="padding-top: 15%; padding-bottom: 15%">
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <div class="card shadow bg-white rounded">
+        <div class="card-body">
+          <h3 class="card-title" style="color: #894fbf">View Events</h3>
+          {% if request.user.is_staff %}
+          <h4 class="card-text">
+            Click <a href="{% url 'tournaments:browse'%}">here</a> to view all
+            events taking place
+          </h4>
+          <h4 class="card-text">
+            Click <a href="{% url 'tournaments:add_child'%}">here</a> to add
+            children to the system
+          </h4>
+          <h4 class="card-text">
+            Click <a href="{% url 'tournaments:add_game'%}">here</a> to add
+            games to the system
+          </h4>
+          <h4 class="card-text">
+            Click <a href="{% url 'tournaments:add_genre'%}">here</a> to add
+            genres to the system
+          </h4>
+          <h4 class="card-text">
+            Click <a href="{% url 'tournaments:remove_child'%}">here</a> to
+            remove child from the system
+          </h4>
+          {% else %}
+          <h4 class="card-text">
+            Click <a href="{% url 'tournaments:browse'%}">here</a> to view all
+            events taking place
+          </h4>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6 mb-3">
+      <div class="card shadow p-3 mb-5 bg-white rounded">
+        <div class="card-body">
+          <h3 class="card-title" style="color: #894fbf">
+            Why Volunteer In Tournaments
+          </h3>
+          <h4 class="card-text">
+            Volunteering as a gamer for a kids' hospital is a genuinely
+            meaningful undertaking. It allows you to provide much-needed
+            entertainment and distraction to young patients facing health
+            challenges.
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

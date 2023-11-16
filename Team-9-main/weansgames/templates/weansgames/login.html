@@ -1,0 +1,39 @@
+{% extends 'weansgames/base.html' %} {% load static %} {% block content_block %}
+{% load crispy_forms_tags %}
+<title>Login</title>
+    <h1 style="text-align: center; padding-top: 5%; color: #894FBF;"> Login </h1>
+<div class="container" style="padding-top: 5%; padding-bottom: 15%">
+        <div class="col mb-3">
+            <div class="card shadow p-3 mb-5 bg-white rounded">
+                <div class="card-body">
+                    {%if invalid_login %} Your login details are invalid! Try again. {% endif %}
+                    <form id="login_form" method="post" action="{% url 'tournaments:login' %}"enctype="multipart/form-data">
+                      {% csrf_token %}
+                      <!-- Email input -->
+                      <div class="form-outline mb-4">
+                        {{user_form.username.errors}}
+                        {{user_form.username|as_crispy_field}}
+                      </div>
+
+                      <!-- Password input -->
+                      <div class="form-outline mb-4">
+                          {{user_form.password.errors}}
+                          {{user_form.password|as_crispy_field}}
+                      </div>
+
+
+                      <!-- Submit button -->
+                      <!---<button type="button" class="btn btn-primary btn-block mb-4">Sign in</button>--->
+                      <button type="submit" value= "submit" class="btn btn-primary btn-block mb-4">Login</button>
+
+                      <!-- Register buttons -->
+                      <div class="text-center">
+                        <p>Not a member? <a href="{% url 'tournaments:register' %}">Register</a></p>
+                      </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
