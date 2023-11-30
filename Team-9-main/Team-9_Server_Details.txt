@@ -1,2 +1,0 @@
-Username:force
-IP Address:ec2-3-250-76-60.eu-west-1.compute.amazonaws.com
